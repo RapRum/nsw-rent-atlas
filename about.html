@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A short explanation of the NSW Rent Atlas dashboard.">
+<meta name="color-scheme" content="light">
+<title>Method — NSW Rent Atlas</title>
+<link rel="stylesheet" href="css/tokens-v6.css">
+<link rel="stylesheet" href="css/app-v7.css">
+</head>
+<body class="dashboard-page page-method page-method-brief">
+<a class="skip" href="#main">Skip to the method</a>
+
+<div class="workspace-shell">
+  <aside class="rail" aria-label="Dashboard sections">
+    <a class="rail-home" href="index.html" data-reset-selection aria-label="NSW Rent Atlas home">RA</a>
+    <nav class="rail-nav" aria-label="Primary navigation">
+      <a href="index.html" data-reset-selection><span class="rail-icon" aria-hidden="true">⌂</span><span class="rail-text">Explore</span></a>
+      <a href="analysis.html" data-reset-selection><span class="rail-icon" aria-hidden="true">↗</span><span class="rail-text">Compare</span></a>
+      <a href="about.html" aria-current="page" data-reset-selection><span class="rail-icon" aria-hidden="true">i</span><span class="rail-text">Method</span></a>
+    </nav>
+    <div class="rail-mark" aria-hidden="true">NSW</div>
+  </aside>
+
+  <main id="main" class="dashboard-canvas method-canvas" tabindex="-1">
+    <header class="dashboard-top method-top">
+      <div class="masthead">
+        <a class="wordmark" href="index.html" data-reset-selection>NSW Rent Atlas<span>Rental pressure by area</span></a>
+      </div>
+      <nav class="nav" aria-label="Sections">
+        <a href="index.html" data-reset-selection><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-text">Explore</span></a>
+        <a href="analysis.html" data-reset-selection><span class="nav-icon" aria-hidden="true">↗</span><span class="nav-text">Compare</span></a>
+        <a href="about.html" aria-current="page" data-reset-selection><span class="nav-icon" aria-hidden="true">i</span><span class="nav-text">Method</span></a>
+      </nav>
+    </header>
+
+    <section class="dashboard-card brief-method-card">
+      <div class="brief-method-heading">
+        <p class="eyebrow">About the dashboard</p>
+        <h1>How to read the atlas</h1>
+        <p>The dashboard links 2025 rental bond rents with 2021–2025 population growth for NSW local government areas.</p>
+      </div>
+
+      <div class="brief-method-grid">
+        <article>
+          <span class="brief-number">01</span>
+          <div>
+            <strong>What it shows</strong>
+            <p>Median weekly rent, bond count and population change by LGA and dwelling type.</p>
+          </div>
+        </article>
+        <article>
+          <span class="brief-number">02</span>
+          <div>
+            <strong>What is included</strong>
+            <p>The source data had 129 matched LGAs. A 30-bond minimum leaves 340 records across 121 LGAs.</p>
+          </div>
+        </article>
+        <article>
+          <span class="brief-number">03</span>
+          <div>
+            <strong>How to interpret it</strong>
+            <p>Use Explore for one area and Compare for LGA vs NSW median or LGA vs LGA. The analysis is bivariate and shows association, not causation.</p>
+          </div>
+        </article>
+      </div>
+
+      <details class="brief-sources">
+        <summary>Data sources</summary>
+        <div class="brief-source-list">
+          <a href="https://www.nsw.gov.au/housing-and-construction/rental-forms-surveys-and-data/rental-bond-data"><strong>NSW Fair Trading</strong><span>Rental bond data · Accessed 30 July 2026</span></a>
+          <a href="https://www.abs.gov.au/statistics/people/population/regional-population/latest-release"><strong>ABS Population</strong><span>Regional population estimates · Accessed 30 July 2026</span></a>
+          <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/correspondences"><strong>ABS Correspondence</strong><span>Postcode-to-LGA assignment · Accessed 30 July 2026</span></a>
+          <a href="https://geo.abs.gov.au/arcgis/rest/services/ASGS2025/LGA/MapServer/0"><strong>ABS Boundaries</strong><span>2025 LGA geometry · Accessed 30 July 2026</span></a>
+        </div>
+      </details>
+    </section>
+  </main>
+</div>
+
+<script src="js/core-v6.js"></script>
+</body>
+</html>
