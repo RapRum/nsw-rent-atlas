@@ -1,0 +1,122 @@
+/* ==========================================================================
+   tokens.css — the visual system
+
+   Two grounds. Ink carries the subject (the selected area); paper carries
+   reference material and long-form reading. Every component in app.css reads
+   from this file and nothing else.
+
+   Two data colours only, for the whole product:
+     ochre  = the selected local government area
+     slate  = the NSW reference value
+   They appear in the map, the bar chart, the rent bars and the legend, and
+   they mean the same thing in all four.
+   ========================================================================== */
+
+:root {
+  /* ----------------------------------------------------------------------
+     Ground 1 — ink
+     ---------------------------------------------------------------------- */
+  --ink-000: #101316;   /* deepest: page behind the panel, map controls */
+  --ink-100: #15191d;   /* panel surface */
+  --ink-200: #1c2126;   /* raised well: selects, buttons */
+  --ink-300: #242a30;   /* hover */
+  --ink-line: #262d34;  /* hairline on ink */
+  --ink-line-strong: #39424a;
+
+  --ink-fg:   #f3f2ef;  /* 15.8:1 on --ink-100 */
+  --ink-fg-2: #a7b0b8;  /* 8.0:1  */
+  --ink-fg-3: #7d8790;  /* 4.8:1  — labels only, never body text */
+
+  /* ----------------------------------------------------------------------
+     Ground 2 — paper
+     ---------------------------------------------------------------------- */
+  --paper:        #f5f4f1;
+  --paper-raised: #ffffff;
+  --paper-sunk:   #eceae5;
+  --paper-line:   #e3e1db;
+  --paper-line-strong: #c9c6be;
+
+  --paper-fg:   #14181b;  /* 16.2:1 on --paper */
+  --paper-fg-2: #565f69;  /* 5.9:1  */
+  --paper-fg-3: #6f7883;  /* 4.5:1  — labels only */
+
+  /* ----------------------------------------------------------------------
+     Data colours — ochre is the subject, slate is the reference
+     ---------------------------------------------------------------------- */
+  --subject:        #b8621f;  /* fills: map polygon, bars, chart series */
+  --subject-strong: #9a4f14;
+  --subject-text:   #8f4610;  /* 5.6:1 on paper — use when ochre carries text */
+  --subject-ink:    #e39a5c;  /* 7.6:1 on ink — the ochre for the dark ground */
+  --subject-wash:   #f7ede3;
+
+  --reference:      #6b7680;  /* fills: NSW median bar, reference rule */
+  --reference-text: #4f5862;  /* 6.6:1 on paper */
+  --reference-ink:  #8b959e;  /* 5.8:1 on ink */
+  --reference-wash: #eceef0;
+
+  /* Choropleth: four cool neutral steps. Deliberately not ochre, so the
+     selected area reads as a different kind of thing rather than a darker
+     value of the same thing. */
+  --map-1: #dce4e6;
+  --map-2: #a8bcc2;
+  --map-3: #6c8a94;
+  --map-4: #375762;
+  --map-none: #b5b2a9;
+
+  /* Status. Used sparingly — status is mostly carried by wording. */
+  --ok:    #2f6b4f;
+  --ok-ink:  #6fb894;
+  --warn:  #8a5a10;
+  --warn-ink: #d9a860;
+  --stop:  #97302a;
+  --stop-ink: #e08b85;
+
+  /* ----------------------------------------------------------------------
+     Type scale — one display size, then a tight ramp.
+     Weights: 400 and 600 only. Numerals are tabular everywhere.
+     ---------------------------------------------------------------------- */
+  --t-micro:   0.6875rem;  /* 11px — eyebrows, legend */
+  --t-small:   0.8125rem;  /* 13px — captions, hints */
+  --t-body:    0.9375rem;  /* 15px — body */
+  --t-lead:    1.0625rem;  /* 17px — lede paragraphs */
+  --t-h3:      1.125rem;   /* 18px */
+  --t-h2:      1.5rem;     /* 24px */
+  --t-figure:  2.25rem;    /* 36px — the one big number */
+  --t-display:  clamp(2rem, 4.4vw, 3.25rem); /* area name */
+
+  --lh-tight: 1.1;
+  --lh-snug:  1.35;
+  --lh-body:  1.6;
+
+  --track-eyebrow: 0.14em;
+  --track-display: -0.025em;
+
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+
+  /* ----------------------------------------------------------------------
+     Spacing — 4px base
+     ---------------------------------------------------------------------- */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 20px;
+  --s5: 32px;
+  --s6: 52px;
+
+  /* ----------------------------------------------------------------------
+     Radius — near-square. Rounded corners read consumer, not civic.
+     ---------------------------------------------------------------------- */
+  --r-control: 2px;
+  --r-surface: 4px;
+
+  /* ----------------------------------------------------------------------
+     Elevation — tone, not shadow. Exactly one shadow exists in the product,
+     for the element that genuinely floats above the map.
+     ---------------------------------------------------------------------- */
+  --lift: 0 2px 10px rgba(16, 19, 22, 0.28);
+
+  /* Layout */
+  --panel-w: 400px;
+  --measure: 68ch;
+}

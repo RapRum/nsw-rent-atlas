@@ -13,7 +13,7 @@ Replace `YOUR-USERNAME` with the GitHub account name.
 ## Dashboard pages
 
 - `index.html` — explore an LGA on the map
-- `analysis.html` — compare an LGA with the NSW median or another LGA
+- `analysis.html` — place selected LGA(s) on the population-growth × rent relationship, then compare with the NSW median or another LGA
 - `about.html` — concise method summary
 
 ## Run locally
@@ -41,7 +41,7 @@ Then open:
 
 ## Data and limitations
 
-The dashboard contains 340 eligible LGA-by-dwelling-type records across 121 LGAs. Groups require at least 30 rental bonds. Median rent is used as a price-based proxy for rental pressure. The statewide analysis is bivariate and describes association rather than causation.
+The dashboard contains 340 eligible LGA-by-dwelling-type records across 121 LGAs. Groups require at least 30 rental bonds. Median rent is used as a price-based proxy for rental pressure. The Compare page now foregrounds a dwelling-specific population-growth × rent scatter plot with the selected LGA(s) highlighted, while the statewide analysis remains bivariate and describes association rather than causation.
 
 ## External libraries and services
 

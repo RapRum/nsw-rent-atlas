@@ -1,0 +1,14 @@
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local servers and generated caches
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# Test artefacts
+*.log

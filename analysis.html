@@ -40,6 +40,7 @@
         <a class="wordmark" href="index.html" data-reset-selection>
           NSW Rent Atlas<span>Rental pressure by area</span>
         </a>
+        <h1 class="sr">Compare population growth and rental pressure across NSW LGAs</h1>
       </div>
 
       <nav class="nav" aria-label="Sections">
@@ -76,19 +77,35 @@
       </div>
     </header>
 
-    <section class="compare-hero">
-      <div class="question-card dashboard-card">
-        <p class="eyebrow">Research question</p>
-        <h1>How is population growth associated with rental pressure across NSW LGAs?</h1>
-        <p>Read the NSW-wide evidence first, then compare one selected LGA either against the NSW median or against another LGA.</p>
-      </div>
-
+    <section class="compare-status-strip" aria-label="Comparison status">
       <div class="status dashboard-card" id="status" data-state="loading" role="status" aria-live="polite" aria-atomic="true">
         <span class="status-mark" aria-hidden="true"></span>
         <div class="status-body">
           <p class="status-title" data-status-title>Loading</p>
           <p class="status-note" data-status-note>Requesting the checked dataset.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="dashboard-card relationship-focus" id="relationship-focus" hidden aria-labelledby="relationship-focus-heading">
+      <div class="card-heading relationship-focus-head">
+        <div>
+          <p class="eyebrow">Selected relationship</p>
+          <h2 id="relationship-focus-heading">Population growth × median rent</h2>
+          <p class="lede" id="relationship-focus-lede">Choose an LGA and dwelling type to place it within the statewide relationship.</p>
+        </div>
+        <span class="evidence-chip" id="relationship-focus-chip">2021–2025 growth × 2025 rent</span>
+      </div>
+
+      <div class="relationship-focus-layout">
+        <div class="relationship-scatter-wrap">
+          <svg id="relationship-scatter" viewBox="0 0 820 460" role="img" aria-labelledby="relationship-scatter-title relationship-scatter-desc">
+            <title id="relationship-scatter-title">Population growth and median rent relationship</title>
+            <desc id="relationship-scatter-desc">Scatter plot of eligible NSW LGAs for the selected dwelling type.</desc>
+          </svg>
+          <div class="scatter-legend" id="relationship-legend" aria-label="Scatter plot legend"></div>
+        </div>
+        <aside class="relationship-focus-metrics" id="relationship-focus-metrics" aria-label="Selected relationship summary"></aside>
       </div>
     </section>
 
