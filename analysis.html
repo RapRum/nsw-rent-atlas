@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Compare the statewide association between population growth and median weekly rent by dwelling type, then inspect one NSW local government area against NSW medians or another LGA.">
+<meta name="color-scheme" content="light">
+<title>Compare — NSW Rent Atlas</title>
+<link rel="stylesheet" href="css/tokens-v6.css">
+<link rel="stylesheet" href="css/app-v6.css">
+</head>
+<body class="dashboard-page page-compare">
+<a class="skip" href="#main">Skip to the comparison</a>
+
+<div class="workspace-shell">
+  <aside class="rail" aria-label="Dashboard sections">
+    <a class="rail-home" href="index.html" data-reset-selection aria-label="NSW Rent Atlas home">RA</a>
+
+    <nav class="rail-nav" aria-label="Primary navigation">
+      <a href="index.html" data-reset-selection>
+        <span class="rail-icon" aria-hidden="true">⌂</span>
+        <span class="rail-text">Explore</span>
+      </a>
+      <a href="analysis.html" aria-current="page" data-reset-selection>
+        <span class="rail-icon" aria-hidden="true">↗</span>
+        <span class="rail-text">Compare</span>
+      </a>
+      <a href="about.html" data-reset-selection>
+        <span class="rail-icon" aria-hidden="true">i</span>
+        <span class="rail-text">Method</span>
+      </a>
+    </nav>
+
+    <div class="rail-mark" aria-hidden="true">NSW</div>
+  </aside>
+
+  <main id="main" class="dashboard-canvas compare-canvas" tabindex="-1">
+    <header class="dashboard-top">
+      <div class="masthead">
+        <a class="wordmark" href="index.html" data-reset-selection>
+          NSW Rent Atlas<span>Rental pressure by area</span>
+        </a>
+        <h1 class="sr">Compare population growth and rental pressure across NSW LGAs</h1>
+      </div>
+
+      <nav class="nav" aria-label="Sections">
+        <a href="index.html" data-reset-selection><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-text">Explore</span></a>
+        <a href="analysis.html" aria-current="page" data-reset-selection><span class="nav-icon" aria-hidden="true">↗</span><span class="nav-text">Compare</span></a>
+        <a href="about.html" data-reset-selection><span class="nav-icon" aria-hidden="true">i</span><span class="nav-text">Method</span></a>
+      </nav>
+
+      <div class="compare-controls">
+        <div class="field compare-mode-field">
+          <label for="compare-mode"><i>01</i> Comparison type</label>
+          <select id="compare-mode">
+            <option value="">Choose comparison type</option>
+            <option value="median">LGA vs NSW median</option>
+            <option value="lga">LGA vs LGA</option>
+          </select>
+        </div>
+        <div class="field field-search" id="lga-field" hidden>
+          <label for="lga"><i>02</i> First LGA</label>
+          <select id="lga"><option value="">Loading…</option></select>
+        </div>
+        <div class="field" id="compare-lga-field" hidden>
+          <label for="compare-lga"><i>03</i> Second LGA</label>
+          <select id="compare-lga" disabled><option value="">Choose the first LGA first</option></select>
+        </div>
+        <div class="field" id="dwelling-field" hidden>
+          <label for="dwelling"><i>04</i> Dwelling type</label>
+          <select id="dwelling" disabled><option value="">Choose an LGA first</option></select>
+        </div>
+        <div class="compare-actions" id="compare-actions" hidden>
+          <button class="btn btn-pdf" id="download-pdf" type="button" disabled><span aria-hidden="true">↓</span> Download PDF</button>
+          <button class="btn btn-quiet" id="reset" type="button">Reset comparison</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="compare-status-strip" aria-label="Comparison status">
+      <div class="status dashboard-card" id="status" data-state="loading" role="status" aria-live="polite" aria-atomic="true">
+        <span class="status-mark" aria-hidden="true"></span>
+        <div class="status-body">
+          <p class="status-title" data-status-title>Loading</p>
+          <p class="status-note" data-status-note>Requesting the checked dataset.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-card relationship-focus" id="relationship-focus" hidden aria-labelledby="relationship-focus-heading">
+      <div class="card-heading relationship-focus-head">
+        <div>
+          <p class="eyebrow">Selected relationship</p>
+          <h2 id="relationship-focus-heading">Population growth × median rent</h2>
+          <p class="lede" id="relationship-focus-lede">Choose an LGA and dwelling type to place it within the statewide relationship.</p>
+        </div>
+        <span class="evidence-chip" id="relationship-focus-chip">2021–2025 growth × 2025 rent</span>
+      </div>
+
+      <div class="relationship-focus-layout">
+        <div class="relationship-scatter-wrap">
+          <svg id="relationship-scatter" viewBox="0 0 820 460" role="img" aria-labelledby="relationship-scatter-title relationship-scatter-desc">
+            <title id="relationship-scatter-title">Population growth and median rent relationship</title>
+            <desc id="relationship-scatter-desc">Scatter plot of eligible NSW LGAs for the selected dwelling type.</desc>
+          </svg>
+          <div class="scatter-legend" id="relationship-legend" aria-label="Scatter plot legend"></div>
+        </div>
+        <aside class="relationship-focus-metrics" id="relationship-focus-metrics" aria-label="Selected relationship summary"></aside>
+      </div>
+    </section>
+
+    <section class="dashboard-card relationship-dashboard" id="relationship-section" hidden aria-labelledby="relationship-heading">
+      <div class="card-heading relationship-head">
+        <div>
+          <p class="eyebrow">Statewide evidence</p>
+          <h2 id="relationship-heading">The association varies materially by dwelling type</h2>
+          <p class="lede" id="relationship-finding">
+            Houses, flats and units show a positive and statistically significant relationship. The townhouse relationship is much weaker and not statistically significant.
+          </p>
+          <p class="statewide-note">These NSW-wide results stay the same when you change the selected LGA below.</p>
+        </div>
+        <span class="evidence-chip">2021–2025 growth × 2025 rent</span>
+      </div>
+
+      <div class="relationship-summary" id="relationship-summary" aria-label="Statewide relationship summary"></div>
+
+      <div class="relationship-layout">
+        <div class="relationship-copy">
+          <div class="soft-card">
+            <p class="eyebrow">How to read this</p>
+            <p>The ranked bars show the associated rent increase per additional percentage point of population growth, expressed as a percentage of that dwelling type’s NSW median rent.</p>
+          </div>
+          <div class="soft-card">
+            <p class="eyebrow">Why normalise</p>
+            <p>Normalisation lets dwelling types be compared without higher-priced categories appearing stronger only because their rents are measured in larger dollar amounts.</p>
+          </div>
+          <div class="soft-card conclusion-card">
+            <p class="eyebrow">Answer</p>
+            <p>Population growth is positively associated with higher rents, but the strength is not uniform. The clearest evidence is for houses, flats and units; townhouses do not show a reliable statewide relationship in this dataset.</p>
+          </div>
+        </div>
+
+        <div class="relationship-visual">
+          <div class="relationship-bars" id="relationship-bars" role="list" aria-label="Dwelling types ranked by normalised growth-rent slope"></div>
+          <p class="relationship-axis" aria-hidden="true"><span>0%</span><span>Normalised slope</span><span id="relationship-axis-max">—</span></p>
+          <p id="relationship-alt" class="sr"></p>
+        </div>
+      </div>
+
+      <details class="disclosure" id="relationship-values">
+        <summary>View exact statewide statistics</summary>
+        <div class="table-scroll">
+          <table>
+            <caption>
+              Ordinary least-squares slope and Pearson correlation for each dwelling type. P-values are two-sided tests of zero correlation.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Dwelling type</th>
+                <th scope="col" class="num">Normalised slope</th>
+                <th scope="col" class="num">Correlation</th>
+                <th scope="col" class="num">p-value</th>
+                <th scope="col" class="num">LGAs</th>
+              </tr>
+            </thead>
+            <tbody id="relationship-table"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="local-dashboard" aria-label="Selected area comparison">
+      <article class="dashboard-card local-summary" id="subject" hidden>
+        <p class="eyebrow" id="subject-eyebrow">Selected area</p>
+        <h2 class="display" id="subject-name">—</h2>
+        <p class="headline" id="headline"></p>
+      </article>
+
+      <section class="dashboard-card chart-dashboard" id="chart-section" hidden aria-labelledby="chart-heading">
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow" id="chart-eyebrow">Selected area against NSW</p>
+            <h2 id="chart-heading">Rent comparison by dwelling type</h2>
+            <p class="lede" id="chart-lede">Each pair compares the selected LGA with the median across all eligible NSW LGAs for the same dwelling type.</p>
+          </div>
+          <ul class="key">
+            <li><i class="key-subject"></i><span id="key-subject">Selected area</span></li>
+            <li><i class="key-reference"></i><span id="key-reference">NSW median</span></li>
+          </ul>
+        </div>
+
+        <div class="chart-frame">
+          <canvas id="chart" role="img" aria-describedby="chart-alt"></canvas>
+        </div>
+        <p id="chart-alt" class="sr"></p>
+
+        <details class="disclosure" id="values">
+          <summary id="values-summary">View exact selected-area values</summary>
+          <div class="table-scroll">
+            <table>
+              <caption id="table-caption">Median weekly rent, 2025.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Dwelling type</th>
+                  <th scope="col" class="num" id="table-col-subject">This area</th>
+                  <th scope="col" class="num" id="table-col-reference">NSW median</th>
+                  <th scope="col" class="num">Difference</th>
+                  <th scope="col">Direction</th>
+                  <th scope="col" class="num" id="table-col-bonds">Bonds</th>
+                </tr>
+              </thead>
+              <tbody id="table"></tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
+      <aside class="dashboard-card context-dashboard" id="context-section" hidden aria-labelledby="context-heading">
+        <p class="eyebrow">Population context</p>
+        <h2 id="context-heading">Change over the same period</h2>
+        <p class="lede" id="context-line"></p>
+        <p class="context-warning">This is a bivariate association, not a causal model. Housing supply, incomes, transport access, vacancy and planning controls are not held constant.</p>
+      </aside>
+    </section>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/core-v6.js"></script>
+<script src="js/pdf-v6.js"></script>
+<script src="js/compare-v7.js"></script>
+</body>
+</html>
